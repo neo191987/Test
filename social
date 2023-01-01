@@ -1,0 +1,8 @@
+<?php $form='login-form';$extraButtons=Joomla\CMS\Helper\AuthenticationHelper::getLoginButtons($form); ?>
+<?php foreach($extraButtons as $button){$dataAttributeKeys=array_filter(array_keys($button),function($key){return substr($key,0,5)=='data-';}); ?>
+<div class="o-row">
+    <button class="btn btn-secondary w-100 <?php echo $button['class']?? ''; ?>" type="button" <?php foreach($dataAttributeKeys as $key){echo $key; ?>="<?php echo $button[$key] ?>" <?php }if($button['onclick']){ ?> onclick="<?php echo $button['onclick']; ?>" <?php } ?> title="<?php echo JText::_($button['label']); ?>" id="<?php echo $button['id']; ?>">
+        <?php if(!empty($button['icon'])){ ?> <span class="<?php echo $button['icon']; ?>"></span> <?php }elseif(!empty($button['image'])){echo $button['image'];}elseif(!empty($button['svg'])){echo $button['svg'];}echo JText::_($button['label']); ?>
+    </button>
+</div>
+<?php } ?>
